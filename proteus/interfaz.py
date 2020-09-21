@@ -31,6 +31,42 @@ def led2dest():
         c=("LED 2 APAGADO")
         mqtt.publish("mdpilatuna.fie@unach.edu.ec/servidor",str(c))
 def on_message(client,obj,msg):
-        accion=(msg.payload.decode("utf").split("")[])
-        
+        accion=(msg.payload.decode("utf").split("")[0])
+        intclave=(msg.payload.decode("utf-8").split("")[1])
+        inttext=(msg.payload.decode("utf-8").split("")[2])
+        print(accion)
+        if intclave1==inttext1:
+            if accion=="led1encendida":
+                 led1act()
+        print(intclave1)
+        print(inttext1)
+        if intclave1==inttext1:
+            if accion=="led1apagada":
+                 led1dest()
+        print(intclave1)
+        print(inttext1)
+        if intclave1==inttext1:
+            if accion=="led2encendida":
+                 led2act()
+        print(intclave1)
+        print(inttext1)
+        if intclave1==inttext1:
+            if accion=="led2apagada":
+                 led2dest()
+        print(intclave1)
+        print(inttext1)
+mqttc = mqtt.Client() 
+mqttc.on_message = on_message
+mqttc.username_pw_set("mdpilatuna.fie@unach.edu.ec","quitociudadhermosa") 
+mqttc.connect("maqiatto.com", 1883) 
+mqttc.subscribe("mdpilatuna.fie@unach.edu.ec/dispositivo", 0)
+rc=0
+print("iniciando.....")
+i=0
+while rc ==0:
+        time.sleep(2)
+        rc=mqttc.loop()
+        i=i+1
+        hactual=datetime.datetime.now().strftime("%a,%d,%b,%Y,%H,%S")
+        print(hactual)
         

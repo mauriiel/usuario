@@ -1,12 +1,33 @@
 //https://www.eclipse.org/paho/clients/js/
 
-function LED1_On() {
-	
-  
+function LED1ENCENDIDO() {
+	inttext1=document.getElementById("inttext1").value
+	intclave1=document.getElementById("intclave").value
+	message=new.Paho.MQTT.Message("led1encendida"+"inttext1"+"intclave1")
+	message.destinationName="mdpilatuna.fie@unach.edu.ec/dispositivo";
+	client.send(message);
 }
-
-
-
+function LED1APAGADO() {
+	inttext2=document.getElementById("inttext1").value
+	intclave2=document.getElementById("intclave").value
+	message=new.Paho.MQTT.Message("led1apagada"+"inttext2"+"intclave2")
+	message.destinationName="mdpilatuna.fie@unach.edu.ec/dispositivo";
+	client.send(message);
+}
+function LED2ENCENDIDO() {
+	inttext3=document.getElementById("inttext1").value
+	intclave3=document.getElementById("intclave").value
+	message=new.Paho.MQTT.Message("led2encendida"+"inttext3"+"intclave3")
+	message.destinationName="mdpilatuna.fie@unach.edu.ec/dispositivo";
+	client.send(message);
+}
+function LED2APAGADO() {
+	inttext4=document.getElementById("inttext1").value
+	intclave4=document.getElementById("intclave").value
+	message=new.Paho.MQTT.Message("led2apagada"+"inttext4"+"intclave4")
+	message.destinationName="mdpilatuna.fie@unach.edu.ec/dispositivo";
+	client.send(message);
+}
 
 // Create a client instance
   //client = new Paho.MQTT.Client("postman.cloudmqtt.com", 14970);
@@ -53,6 +74,9 @@ function LED1_On() {
 
   // called when a message arrives
   function onMessageArrived(message) {
-    console.log("onMessageArrived:"+message.payloadString);
+    text=(message.payloadString);
+	console.log(text)
+	document.getElementById("respuesta").innerHTML=text;
+	
   }
   
